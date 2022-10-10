@@ -67,7 +67,7 @@ if [ "$platform" == "Linux" ]
             else
                 export CC="$(which musl-gcc 2>/dev/null)"
         fi
-        export CFLAGS="-static -static-libgcc -static-libstdc++"
+        export CFLAGS="-static"
         export LDFLAGS='--static'
     else
         echo "= WARNING: your platform does not support static binaries."
@@ -86,6 +86,7 @@ shopt -s extglob
 
 echo "= extracting gawk binary"
 cp build/gawk-${gawk_version}/gawk release 2>/dev/null
+ln -srf release/gawk release/awk
 
 echo "= striptease"
 for file in release/*
